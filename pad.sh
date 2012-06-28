@@ -1,19 +1,24 @@
 #!/bin/bash
+#Args
+# $1 = the filename to pad
+# $2 = the ration - NOT IMPLEMENTED
 FILENAME=$1
 HEIGHT=`identify -format "%h" "$FILENAME"`
 WIDTH=`identify -format "%w" "$FILENAME"`
-echo $HEIGHT
-echo $WIDTH
+echo Beginning WxH: $HEIGHT $WIDTH
 TARGETHEIGHT=0
 TARGETWIDTH=0
-COMPAREWIDTH=$(($HEIGHT * 2 / 3))
+RATIO=2/3
+REVERSERATIO=3/2 
+
+COMPAREWIDTH=$(($HEIGHT * $RATIO))
 if [ $WIDTH -gt  $COMPAREWIDTH ]
 then 
   TARGETWIDTH=$WIDTH
-  TARGETHEIGHT=$(($WIDTH * 3 / 2))
+  TARGETHEIGHT=$(($WIDTH * $REVERSERATIO))
 else 
   TARGETHEIGHT=$HEIGHT
-  TARGETWIDTH=$(($HEIGHT * 2 / 3))
+  TARGETWIDTH=$(($HEIGHT * $RATIO))
 fi
 echo $TARGETHEIGHT
 echo $TARGETWIDTH
